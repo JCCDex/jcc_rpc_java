@@ -1,11 +1,11 @@
 package com.jccdex.rpc.api;
 
 import com.jccdex.rpc.base.JCallback;
-import com.jccdex.rpc.url.JUrl;
+import com.jccdex.rpc.url.BaseUrl;
 
 public class JcExchangeAPI implements BaseExchangeAPI {
 
-	private JUrl mJUrl;
+	private BaseUrl mBaseUrl;
 
 	private JcExchangeAPI() {
 	}
@@ -28,13 +28,13 @@ public class JcExchangeAPI implements BaseExchangeAPI {
 		}
 	}
 
-	public void setmJUrl(JUrl mJUrl) {
-		this.mJUrl = mJUrl;
+	public void setmBaseUrl(BaseUrl mBaseUrl) {
+		this.mBaseUrl = mBaseUrl;
 	}
 
 	public void requestBalance(String address, JCallback callback) {
 		// TODO Auto-generated method stub
-		String url = mJUrl.getUrl();
+		String url = mBaseUrl.getUrl();
 	}
 
 	public void requestHistoricTransactions(String address, int page, int ledger, int seq, JCallback callback) {
