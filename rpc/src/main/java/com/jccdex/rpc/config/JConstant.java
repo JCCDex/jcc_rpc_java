@@ -19,4 +19,9 @@ public class JConstant {
 	public static final String JC_REQUEST_SEQUENCE = "/exchange/sequence/";
 
 	public static final String JC_TRNSFER_TOKEN_URL = "/exchange/sign_payment";
+
+	/**
+	 * return -1 if request sequence in error
+	 */
+	public static final int ERROR_SEQUENCE = -1;
 }
