@@ -3,27 +3,27 @@ package com.jccdex.rpc.api;
 import com.jccdex.rpc.base.JCallback;
 import com.jccdex.rpc.url.BaseUrl;
 
-public class JcExchangeAPI implements BaseExchangeAPI {
+public class JccdexExchange implements Exchange {
 
 	private BaseUrl mBaseUrl;
 
-	private JcExchangeAPI() {
+	private JccdexExchange() {
 	}
 
-	public static JcExchangeAPI getInstance() {
+	public static JccdexExchange getInstance() {
 		return Singleton.INSTANCE.getInstance();
 	}
 
 	private static enum Singleton {
 		INSTANCE;
 
-		private JcExchangeAPI singleton;
+		private JccdexExchange singleton;
 
 		private Singleton() {
-			singleton = new JcExchangeAPI();
+			singleton = new JccdexExchange();
 		}
 
-		public JcExchangeAPI getInstance() {
+		public JccdexExchange getInstance() {
 			return singleton;
 		}
 	}
