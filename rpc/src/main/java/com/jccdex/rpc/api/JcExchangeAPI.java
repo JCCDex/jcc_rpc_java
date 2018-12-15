@@ -1,15 +1,11 @@
 package com.jccdex.rpc.api;
 
 import com.jccdex.rpc.base.JCallback;
-import com.jccdex.rpc.base.JUtils;
+import com.jccdex.rpc.url.JUrl;
 
 public class JcExchangeAPI implements BaseExchangeAPI {
 
-	private String host;
-
-	private int port;
-
-	private Boolean secure;
+	private JUrl mJUrl;
 
 	private JcExchangeAPI() {
 	}
@@ -32,21 +28,13 @@ public class JcExchangeAPI implements BaseExchangeAPI {
 		}
 	}
 
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public void setSecure(Boolean secure) {
-		this.secure = secure;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
+	public void setmJUrl(JUrl mJUrl) {
+		this.mJUrl = mJUrl;
 	}
 
 	public void requestBalance(String address, JCallback callback) {
 		// TODO Auto-generated method stub
-		String url = JUtils.formatUrl(this.host, this.port, this.secure);
+		String url = mJUrl.getUrl();
 	}
 
 	public void requestHistoricTransactions(String address, int page, int ledger, int seq, JCallback callback) {

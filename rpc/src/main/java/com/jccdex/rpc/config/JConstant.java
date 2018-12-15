@@ -12,13 +12,13 @@ public class JConstant {
 
 	public static final String JC_REQUEST_ORDER_ROUTE = "/exchange/orders/";
 
-	public static final String JC_CREATE_ORDER_ROUTE = "/exchange/sign_order";
+	public static final String JC_CREATE_ORDER_ROUTE = "/exchange/sign_order/";
 
-	public static final String JC_CANCEL_ORDER_ROUTE = "/exchange/sign_cancel_order";
+	public static final String JC_CANCEL_ORDER_ROUTE = "/exchange/sign_cancel_order/";
 
 	public static final String JC_REQUEST_SEQUENCE_ROUTE = "/exchange/sequence/";
 
-	public static final String JC_TRNSFER_TOKEN_ROUTE = "/exchange/sign_payment";
+	public static final String JC_TRNSFER_TOKEN_ROUTE = "/exchange/sign_payment/";
 
 	/**
 	 * return -1 if request sequence in error
