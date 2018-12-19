@@ -61,6 +61,10 @@ public class JccdexExchange implements Exchange {
 		return statusCode == HTTP_STATUS_OK || statusCode == HTTP_STATUS_NOT_MODIFIED;
 	}
 
+	private String formatExceptionMessage(Response response) {
+		return response.code() + ": " + response.message();
+	}
+
 	public final OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(30000, TimeUnit.MILLISECONDS)
 			.cookieJar(new CookieJar() {
 				Map<String, List<Cookie>> cookieStore = new HashMap<String, List<Cookie>>();
@@ -82,16 +86,19 @@ public class JccdexExchange implements Exchange {
 	 * @param callback
 	 */
 	public void requestBalance(String address, @NotNull JCallback callback) {
-		String url = mBaseUrl.getUrl();
-		url = url + JConstant.JC_REQUEST_BALANCE_ROUTE + address;
+		String url = mBaseUrl.getUrl() + JConstant.JC_REQUEST_BALANCE_ROUTE + address;
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}
