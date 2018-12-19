@@ -28,6 +28,10 @@ public class JccdexExchange implements Exchange {
 
 	private BaseUrl mBaseUrl;
 
+	private static final int HTTP_STATUS_OK = 200;
+
+	private static final int HTTP_STATUS_NOT_MODIFIED = 304;
+
 	private JccdexExchange() {
 	}
 
@@ -51,6 +55,10 @@ public class JccdexExchange implements Exchange {
 
 	public void setmBaseUrl(BaseUrl mBaseUrl) {
 		this.mBaseUrl = mBaseUrl;
+	}
+
+	private Boolean isSuccessful(int statusCode) {
+		return statusCode == HTTP_STATUS_OK || statusCode == HTTP_STATUS_NOT_MODIFIED;
 	}
 
 	public final OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(30000, TimeUnit.MILLISECONDS)
@@ -200,26 +208,24 @@ public class JccdexExchange implements Exchange {
 	 * @param address {hex string}
 	 */
 	public int requestSequence(String address) {
-		String url = mBaseUrl.getUrl();
-		url = url + JConstant.JC_REQUEST_SEQUENCE_ROUTE + address;
+		String url = mBaseUrl.getUrl() + JConstant.JC_REQUEST_SEQUENCE_ROUTE + address;
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			int statusCode = response.code();
-			body.close();
-			if (statusCode == 200) {
+			if (isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				body.close();
 				JSONObject jsonResponse = JSONObject.parseObject(res);
-				int dataCode = jsonResponse.getIntValue("code");
-				if (dataCode == 0) {
-					JSONObject jsonData = JSONObject.parseObject(jsonResponse.getString("data"));
-					return jsonData.getIntValue("sequence");
+				String code = jsonResponse.getString("code");
+				if ((JConstant.REQUEST_JC_SUCCESS_CODE).equals(code)) {
+					return JSONObject.parseObject(jsonResponse.getString("data")).getIntValue("sequence");
 				}
+				return JConstant.ERROR_SEQUENCE;
 			}
-			return -1;
+			return JConstant.ERROR_SEQUENCE;
 		} catch (IOException e) {
-			return -1;
+			return JConstant.ERROR_SEQUENCE;
 		}
 	}
 
