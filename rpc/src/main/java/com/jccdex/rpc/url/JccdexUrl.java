@@ -1,5 +1,7 @@
 package com.jccdex.rpc.url;
 
+import javax.validation.constraints.NotNull;
+
 public class JccdexUrl extends BaseUrl {
 	private String host;
 	private int port;
@@ -9,13 +11,13 @@ public class JccdexUrl extends BaseUrl {
 		this.host = "";
 	}
 
-	public JccdexUrl(String host, Boolean secure, int port) {
+	public JccdexUrl(@NotNull String host, @NotNull Boolean secure, @NotNull int port) {
 		this.host = host;
 		this.port = port;
 		this.secure = secure;
 	}
 
-	public JccdexUrl(String host, Boolean secure) {
+	public JccdexUrl(@NotNull String host, @NotNull Boolean secure) {
 		this.host = host;
 		this.secure = secure;
 		this.port = secure ? 443 : 80;
