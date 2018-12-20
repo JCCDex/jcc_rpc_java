@@ -54,6 +54,7 @@ public class JccdexInfoTest {
 		info.setmBaseUrl(jccUrl);
 		info.requestDepth("swt", "cnt", "normal", callBack);
 		info.requestDepth("swt", "cnt", "more", callBack);
+		info.requestDepth("swt", "cnt", "test", callBack);
 		info.requestDepth("swt", "jcnt", "normal", callBack);
 		info.requestDepth("", "cnt", "normal", callBack);
 		info.requestDepth("swt", "", "normal", callBack);
@@ -83,12 +84,12 @@ public class JccdexInfoTest {
 		System.out.println("------------testReuestHistory--------------");
 		info.setmBaseUrl(jccUrl);
 		String unixtime = String.valueOf(System.currentTimeMillis() / 1000);
-		System.out.println(unixtime);
 		info.requestHistory("swt", "cnt", "newest", unixtime, callBack);
 		info.requestHistory("swt", "cnt", "newest", "", callBack);
 		info.requestHistory("swt", "cnt", "newest", "11111", callBack);
 		info.requestHistory("swt", "cnt", "all", unixtime, callBack);
 		info.requestHistory("swt", "cnt", "more", unixtime, callBack);
+		info.requestHistory("swt", "cnt", "test", unixtime, callBack);
 		info.requestHistory("", "cnt", "more", unixtime, callBack);
 		info.requestHistory("swt", "", "more", unixtime, callBack);
 		info.requestHistory("swt", "cnt", "", unixtime, callBack);

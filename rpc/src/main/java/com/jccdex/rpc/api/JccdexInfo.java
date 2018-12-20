@@ -96,6 +96,8 @@ public class JccdexInfo implements Info {
 
 	/**
 	 * get all tickers info
+	 * 
+	 * @param callBack
 	 */
 	@Override
 	public void requestAllTickers(JCallback callBack) {
@@ -121,7 +123,7 @@ public class JccdexInfo implements Info {
 	 * 
 	 * @param base
 	 * @param counter
-	 * @param type     {normal(default) | more}
+	 * @param type     {normal | more}
 	 * @param callBack
 	 */
 	@Override
