@@ -28,10 +28,6 @@ public class JccdexExchange implements Exchange {
 
 	private BaseUrl mBaseUrl;
 
-	private static final int HTTP_STATUS_OK = 200;
-
-	private static final int HTTP_STATUS_NOT_MODIFIED = 304;
-
 	private JccdexExchange() {
 	}
 
@@ -57,17 +53,9 @@ public class JccdexExchange implements Exchange {
 		this.mBaseUrl = mBaseUrl;
 	}
 
-	private Boolean isSuccessful(int statusCode) {
-		return statusCode == HTTP_STATUS_OK || statusCode == HTTP_STATUS_NOT_MODIFIED;
-	}
-
-	private String formatExceptionMessage(Response response) {
-		return response.code() + ": " + response.message();
-	}
-
 	public final OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(30000, TimeUnit.MILLISECONDS)
 			.cookieJar(new CookieJar() {
-				Map<String, List<Cookie>> cookieStore = new HashMap<String, List<Cookie>>();
+				private final Map<String, List<Cookie>> cookieStore = new HashMap<String, List<Cookie>>();
 
 				public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
 					cookieStore.put(url.host(), cookies);
@@ -90,14 +78,14 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			if (isSuccessful(response.code())) {
+			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
 				String code = JSONObject.parseObject(res).getString("code");
 				body.close();
 				callback.onResponse(code, res);
 			} else {
-				callback.onFail(new Exception(formatExceptionMessage(response)));
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
 			}
 		} catch (IOException e) {
 			callback.onFail(e);
@@ -117,7 +105,7 @@ public class JccdexExchange implements Exchange {
 			@NotNull JCallback callback) {
 		String url = mBaseUrl.getUrl();
 		url = url + JConstant.JC_REQUEST_HISTORY_ROUTE + address + "/" + String.valueOf(page);
-		Request.Builder reqBuild = new Request.Builder();
+		final Request.Builder reqBuild = new Request.Builder();
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
 		if (page > 1) {
 			urlBuilder.addQueryParameter("ledger", String.valueOf(ledger));
@@ -127,11 +115,15 @@ public class JccdexExchange implements Exchange {
 		Request request = reqBuild.build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}
@@ -149,11 +141,15 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}
@@ -174,11 +170,15 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).post(formBody).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}
@@ -199,11 +199,15 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).delete(formBody).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}
@@ -219,7 +223,7 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			if (isSuccessful(response.code())) {
+			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
 				body.close();
@@ -251,11 +255,15 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).post(formBody).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
-			ResponseBody body = response.body();
-			String res = body.string();
-			String code = String.valueOf(response.code());
-			callback.onResponse(code, res);
-			body.close();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
 		} catch (IOException e) {
 			callback.onFail(e);
 		}

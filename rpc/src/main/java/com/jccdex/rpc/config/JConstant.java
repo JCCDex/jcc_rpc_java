@@ -6,6 +6,7 @@ public class JConstant {
 	public static final String REQUEST_JC_SUCCESS_CODE = "0";
 
 	// jingchang api route
+	/* for Exchange API */
 	public static final String JC_REQUEST_BALANCE_ROUTE = "/exchange/balances/";
 
 	public static final String JC_REQUEST_HISTORY_ROUTE = "/exchange/tx/";
@@ -19,6 +20,17 @@ public class JConstant {
 	public static final String JC_REQUEST_SEQUENCE_ROUTE = "/exchange/sequence/";
 
 	public static final String JC_TRNSFER_TOKEN_ROUTE = "/exchange/sign_payment/";
+
+	/* for Info API */
+	public static final String JC_REQUEST_TICKER_ROUTE = "/info/ticker/";
+
+	public static final String JC_REQUEST_ALLTICKERS_ROUTE = "/info/alltickers";
+
+	public static final String JC_REQUEST_DEPTH_ROUTE = "/info/depth/";
+
+	public static final String JC_REQUEST_KLINE_ROUTE = "/info/kline/";
+
+	public static final String JC_REQUEST_INFO_HISTORY_ROUTE = "/info/history/";
 
 	/**
 	 * return -1 if request sequence in error
