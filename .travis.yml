@@ -1,0 +1,14 @@
+language: java
+
+sudo: false
+
+script: 
+   - mvn clean test
+
+after_success:
+  - mvn jacoco:report
+  - mvn coveralls:report -DrepoToken="${COVERALLS_TOKEN}"
+
+env:
+  global:
+    secure: j0f/MRFTol2Sj1QfdRI+/3QIcDfp0zyGoEYNJc+GWXzEokdUyVUp7NAVJIpaqTWBRhZPWGk0ZD9sPwOSI5zCX6bYPRlY9J5qIQcQ46S9laLHE+aaNwGNJZ4RxPZQFeqQYwuyV4JfCooLgUO9nV1Gesh6lst33v3PW5pWyUrzXil4+ayJ5L/afCdLel3IM0eRGbKS1CeXC1JFGadAmK3b/TC8/0KGdvdwBTaKVcpez4+GOV0f1W3JpjpDokeYhETRWrcsWvyDyuS+1P2rAqbL3BQ0rXNKwgWAty+EPpp/kDHu7oyGQFMqS+BcBrIP3QlKVecyOOLgZkzm5Q45SmTLOSzo91/4x7ZhVycra8DebBL4rSxIx/zcqdqeftT0acZc9K6dtrLfLbsmP9JLuvB/TIxBn6DHq/cRpi1YPNK89UyZtTkV963dbRokUspLgN40Ii5yEavw6BOizuh2GoBa9jUbg6Ohi7VstNgfOptOJVqR4ESectU2ljzXGDvVP//o7VaGiRdEqKLFRiFOUEgIJ7bO+tK3YcdSEmeROPR52WO9YLo0l6jT47qnzUbFHvI0Q1SqvbdNVBS4j365NbcCXp00Vd44+w/fKA/hkPXEkLZ/u5u+gfPmx8967U/P3D61ntR+BbxpAe5P+DFjkIRG+yHWrgXjK+z2JekvqwtYMM0=
