@@ -3,6 +3,7 @@ language: java
 sudo: false
 
 script: 
+   - cd rpc
    - mvn clean test
 
 after_success:
