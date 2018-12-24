@@ -23,6 +23,24 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.6.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.6.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>3.12.0</version>
@@ -88,7 +106,6 @@
 						<docencoding>${project.build.sourceEncoding}</docencoding>
 						<charset>${project.build.sourceEncoding}</charset>
 						<additionalparam>-XDignore.symbol.file</additionalparam>
-						<additionalparam>-Xdoclint:-html</additionalparam>
 						<linksource>true</linksource>
 					</configuration>
 					<executions>

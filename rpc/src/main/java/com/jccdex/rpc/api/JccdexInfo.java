@@ -152,6 +152,7 @@ public class JccdexInfo implements Info {
 	 * @param base
 	 * @param counter
 	 * @param type    {hour | day | week | month}
+	 * @param callBack
 	 */
 	@Override
 	public void requestKline(@NotNull String base, @NotNull String counter, @NotNull String type,
@@ -180,6 +181,7 @@ public class JccdexInfo implements Info {
 	 * @param counter
 	 * @param type    {all | more | newest}
 	 * @param time    {Unix time}
+	 * @param callBack
 	 */
 	@Override
 	public void requestHistory(@NotNull String base, @NotNull String counter, @NotNull String type,

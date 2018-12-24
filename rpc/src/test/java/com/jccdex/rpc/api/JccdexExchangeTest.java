@@ -3,104 +3,178 @@ package com.jccdex.rpc.api;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import com.jccdex.rpc.base.JCallback;
 import com.jccdex.rpc.url.JccdexUrl;
 
+@PrepareForTest({ CommUtils.class })
 public class JccdexExchangeTest {
 //	public final String host = "192.168.66.253";
 //	public JccdexUrl jccUrl = new JccdexUrl(host, false);
 	public final String host = "ektjsbdyfg.weidex.vip";
 	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
-	public JCallback callBack = new JCallback() {
+	JccdexExchange exchange = JccdexExchange.getInstance();
+	public JCallback mockCallBack;
 
-		@Override
-		public void onResponse(String code, String response) {
-			System.out.println(code);
-			System.out.println(response);
-		}
-
-		@Override
-		public void onFail(Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-	};
+	@Test
+	public void testReuestAll() {
+		mockCallBack = Mockito.mock(JCallback.class);
+		JccdexExchange mockExchange = Mockito.mock(JccdexExchange.class);
+		mockExchange.requestBalance("11", mockCallBack);
+		Mockito.verify(mockExchange).requestBalance("11", mockCallBack);
+		mockExchange.requestHistoricTransactions("11", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockExchange).requestHistoricTransactions("11", 0, 0, 0, mockCallBack);
+		mockExchange.requestOrders("11", 0, mockCallBack);
+		Mockito.verify(mockExchange).requestOrders("11", 0, mockCallBack);
+		mockExchange.createOrder("11", mockCallBack);
+		Mockito.verify(mockExchange).createOrder("11", mockCallBack);
+		mockExchange.cancelOrder("11", mockCallBack);
+		Mockito.verify(mockExchange).cancelOrder("11", mockCallBack);
+		mockExchange.requestSequence("11");
+		Mockito.verify(mockExchange).requestSequence("11");
+		mockExchange.transferToken("11", mockCallBack);
+		Mockito.verify(mockExchange).transferToken("11", mockCallBack);
+	}
 
 	@Test
 	public void testRequestBalance() {
-		System.out.println("------------testRequestBalance--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 
 		// correct address
-		exchange.requestBalance("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestBalance("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// incorrect address
-		exchange.requestBalance("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestBalance("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// none address
-		exchange.requestBalance("", callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestBalance("", mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.requestBalance("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
 	@Test
 	public void testRequestHistoricTransactions() {
-		System.out.println("------------testRequestHistoricTransactions--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		// correct address at page 1
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// correct address at page 2
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, 11461562, 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, 11461562, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// correct address
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, 0, 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// none address
-		exchange.requestHistoricTransactions("", 0, 0, 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestHistoricTransactions("", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
+		// special address
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestHistoricTransactions("?", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
 	@Test
 	public void testRequestOrders() {
-		System.out.println("------------testRequestOrders--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		// correct address
-		exchange.requestOrders("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrders("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// incorrect address
-		exchange.requestOrders("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrders("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// none address
-		exchange.requestOrders("", 0, callBack);
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrders("", 0, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.requestOrders("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
 	@Test
 	public void testCreateOrder() {
-		System.out.println("------------testCreateOrder--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		// failed to create order
+		mockCallBack = Mockito.mock(JCallback.class);
 		String signature = "1200072200000000240000000C6440000000000F424065D3038D7EA4C68000000000000000000000000000434E590000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000000A732102889E27E7A9CCE4AC7639A3B8D0B76802CD6DAA611DA9BB374BEDC425890A10DD7446304402205E5870C84A29E2CDA4A5EBCE0117CE3803F15CDCEE7B8081E3E934AA91CADD680220562254492372E040C208FD4B925A643540DFFB2E1210A6BB46F0DB7BECA75ADC811477DAE3BDFE78BB2C82F15CAC65E2472AC65C0C2A";
-		exchange.createOrder(signature, callBack);
+		exchange.createOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.createOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect url
+		mockCallBack = Mockito.mock(JCallback.class);
+		JccdexUrl mockUrl = Mockito.mock(JccdexUrl.class);
+		Mockito.when(mockUrl.getUrl()).thenReturn("https://ektjsbdyfg.weidex.vip:443/11");
+		exchange.setmBaseUrl(mockUrl);
+		exchange.createOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
 	@Test
 	public void testCancelOrder() {
-		System.out.println("------------testCancelOrder--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		// failed to cancel order
+		mockCallBack = Mockito.mock(JCallback.class);
 		String signature = "1200072200000000240000000C6440000000000F424065D3038D7EA4C68000000000000000000000000000434E590000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000000A732102889E27E7A9CCE4AC7639A3B8D0B76802CD6DAA611DA9BB374BEDC425890A10DD7446304402205E5870C84A29E2CDA4A5EBCE0117CE3803F15CDCEE7B8081E3E934AA91CADD680220562254492372E040C208FD4B925A643540DFFB2E1210A6BB46F0DB7BECA75ADC811477DAE3BDFE78BB2C82F15CAC65E2472AC65C0C2A";
-		exchange.cancelOrder(signature, callBack);
+		exchange.cancelOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.cancelOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect url
+		mockCallBack = Mockito.mock(JCallback.class);
+		JccdexUrl mockUrl = Mockito.mock(JccdexUrl.class);
+		Mockito.when(mockUrl.getUrl()).thenReturn("https://ektjsbdyfg.weidex.vip:443/11");
+		exchange.setmBaseUrl(mockUrl);
+		exchange.cancelOrder(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
 	@Test
 	public void testRequestSequence() {
-		System.out.println("------------testRequestSequence--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		int sequence;
 		// correct address
@@ -114,16 +188,34 @@ public class JccdexExchangeTest {
 		// none address
 		sequence = exchange.requestSequence("");
 		assertTrue(sequence == -1);
+
+		// incorrect host
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.requestSequence("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6");
+		assertTrue(sequence == -1);
 	}
 
 	@Test
 	public void testTransferToken() {
-		System.out.println("------------testTransferToken--------------");
-		JccdexExchange exchange = JccdexExchange.getInstance();
 		exchange.setmBaseUrl(jccUrl);
 		// failed to transfer token
+		mockCallBack = Mockito.mock(JCallback.class);
 		String signature = "1200072200000000240000000C6440000000000F424065D3038D7EA4C68000000000000000000000000000434E590000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000000A732102889E27E7A9CCE4AC7639A3B8D0B76802CD6DAA611DA9BB374BEDC425890A10DD7446304402205E5870C84A29E2CDA4A5EBCE0117CE3803F15CDCEE7B8081E3E934AA91CADD680220562254492372E040C208FD4B925A643540DFFB2E1210A6BB46F0DB7BECA75ADC811477DAE3BDFE78BB2C82F15CAC65E2472AC65C0C2A";
-		exchange.transferToken(signature, callBack);
-	}
+		exchange.transferToken(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.transferToken(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect port
+		mockCallBack = Mockito.mock(JCallback.class);
+		JccdexUrl mockUrl = Mockito.mock(JccdexUrl.class);
+		Mockito.when(mockUrl.getUrl()).thenReturn("https://ektjsbdyfg.weidex.vip:443/11");
+		exchange.setmBaseUrl(mockUrl);
+		exchange.transferToken(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+	}
 }
