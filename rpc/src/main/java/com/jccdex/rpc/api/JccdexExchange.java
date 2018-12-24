@@ -78,6 +78,7 @@ public class JccdexExchange implements Exchange {
 		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = okHttpClient.newCall(request).execute();
+			System.out.println(response.code());
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
