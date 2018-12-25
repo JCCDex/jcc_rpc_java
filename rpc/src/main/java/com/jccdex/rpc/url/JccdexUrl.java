@@ -29,8 +29,8 @@ public class JccdexUrl extends BaseUrl {
 	}
 
 	/**
-	 * if the secure is true, url is startwith https://,otherwise is startwith
-	 * http://.
+	 * if the secure is true, url is startwith https://,port is 443,otherwise is startwith
+	 * http://,port is 80.
 	 * 
 	 * @param host
 	 * @param secure
