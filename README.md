@@ -4,7 +4,7 @@ jcc rpc java version
 [![Build Status](https://travis-ci.com/JCCDex/jcc_rpc_java.svg?branch=master)](https://travis-ci.com/JCCDex/jcc_rpc_java)
 [![Coverage Status](https://coveralls.io/repos/github/JCCDex/jcc_rpc_java/badge.svg?branch=master)](https://coveralls.io/github/JCCDex/jcc_rpc_java?branch=master)
 
-### Usage of jcc_rpc_java API
+## Usage of jcc_rpc_java API
 
 ## JCallback interface
 ```javascript
@@ -19,7 +19,7 @@ void onResponse(String code, String response);
 void onFail(Exception e);
 ```
 
-## Create JccdexUrl.
+### Create JccdexUrl.
 ```javascript
 JccdexUrl jccUrl = new JccdexUrl("xxx", true);// https://xxx:443
 JccdexUrl jccUrl = new JccdexUrl("xxx", false);// http://xxx:80
@@ -27,15 +27,15 @@ or
 JccdexUrl jccUrl = new JccdexUrl("xxx", true, 8081);// https://xxx:8081
 ```
 
-### JccdexExchange API
+## JccdexExchange API
 
-## Create JccdexExchange.
+### Create JccdexExchange.
 ```javascript
 JccdexExchange exchange = JccdexExchange.getInstance();
 exchange.setmBaseUrl(jccUrl);
 ```
 
-## requestBalance
+### requestBalance
 ```javascript
 /** get balance with jingtum address. */
 exchange.requestBalance(address, callback);
@@ -45,7 +45,7 @@ Parameters
 `address`- `string`
 `callback`- `implements JCallback`
 
-## requestHistoricTransactions
+### requestHistoricTransactions
 ```javascript
 /** get historic transactions with jingtum address. */
 exchange.requestHistoricTransactions(address, page, ledger, seq, callback);
@@ -59,7 +59,7 @@ Parameters
 `seq`- `int`
 `callback`- `implements JCallback`
 
-## requestOrders
+### requestOrders
 ```javascript
 /** get current orders with jingtum address. */
 exchange.requestOrders(address, page, callback);
@@ -71,7 +71,7 @@ Parameters
 `page`- `int`
 `callback`- `implements JCallback`
 
-## createOrder
+### createOrder
 ```javascript
 exchange.createOrder(signature, callback);
 ```
@@ -81,7 +81,7 @@ Parameters
 `signature`- `string`
 `callback`- `implements JCallback`
 
-## cancelOrder
+### cancelOrder
 ```javascript
 exchange.cancelOrder(signature, callback);
 ```
@@ -91,7 +91,7 @@ Parameters
 `signature`- `string`
 `callback`- `implements JCallback`
 
-## requestSequence
+### requestSequence
 ```javascript
 /** get sequence with jingtum address. */
 exchange.requestSequence(address);
@@ -101,7 +101,7 @@ Parameters
 
 `address`- `string`
 
-## transferToken
+### transferToken
 ```javascript
 exchange.transferToken(signature, callback);
 ```
@@ -111,13 +111,13 @@ Parameters
 `signature`- `string`
 `callback`- `implements JCallback`
 
-### JccdexInfo API
+## JccdexInfo API
 ```javascript
 JccdexInfo info = JccdexInfo.getInstance();
 info.setmBaseUrl(jccUrl);
 ```
 
-## requestTicker
+### requestTicker
 ```javascript
 info.requestTicker(base, counter, callBack);
 // info.requestTicker("swt", "cnt", mockCallBack);
@@ -129,7 +129,7 @@ Parameters
 `counter`- `string`
 `callback`- `implements JCallback`
 
-## requestAllTickers
+### requestAllTickers
 ```javascript
 info.requestAllTickers(callBack);
 ```
@@ -138,7 +138,7 @@ Parameters
 
 `callback`- `implements JCallback`
 
-## requestDepth
+### requestDepth
 ```javascript
 info.requestDepth(base, counter, type, callBack);
 // info.requestDepth("swt", "cnt", "normal", mockCallBack);
@@ -151,7 +151,7 @@ Parameters
 `type`- `string {more | normal}`
 `callback`- `implements JCallback`
 
-## requestKline
+### requestKline
 ```javascript
 info.requestKline(base, counter, type, callBack);
 // info.requestDepth("swt", "cnt", "normal", mockCallBack);
@@ -164,7 +164,7 @@ Parameters
 `type`- `string {hour | day | week | month}`
 `callback`- `implements JCallback`
 
-## requestHistory
+### requestHistory
 ```javascript
 info.requestHistory(base, counter, type, time, callBack);
 // String unixtime = String.valueOf(System.currentTimeMillis() / 1000);
@@ -179,7 +179,7 @@ Parameters
 `time`- `string {Unix time}`
 `callback`- `implements JCallback`
 
-## requestTickerFromCMC
+### requestTickerFromCMC
 ```javascript
 /**the token value includes eth and btc, the currency value includes cny and rub so far.*/
 info.requestTickerFromCMC(token, currency, callBack)
