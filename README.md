@@ -43,6 +43,7 @@ exchange.requestBalance(address, callback);
 Parameters
 
 `address`- `string`
+
 `callback`- `implements JCallback`
 
 ### requestHistoricTransactions
@@ -54,9 +55,13 @@ exchange.requestHistoricTransactions(address, page, ledger, seq, callback);
 Parameters
 
 `address`- `string`
+
 `page`- `int`
+
 `ledger`- `int`
+
 `seq`- `int`
+
 `callback`- `implements JCallback`
 
 ### requestOrders
@@ -68,7 +73,9 @@ exchange.requestOrders(address, page, callback);
 Parameters
 
 `address`- `string`
+
 `page`- `int`
+
 `callback`- `implements JCallback`
 
 ### createOrder
@@ -79,6 +86,7 @@ exchange.createOrder(signature, callback);
 Parameters
 
 `signature`- `string`
+
 `callback`- `implements JCallback`
 
 ### cancelOrder
@@ -89,6 +97,7 @@ exchange.cancelOrder(signature, callback);
 Parameters
 
 `signature`- `string`
+
 `callback`- `implements JCallback`
 
 ### requestSequence
@@ -109,6 +118,7 @@ exchange.transferToken(signature, callback);
 Parameters
 
 `signature`- `string`
+
 `callback`- `implements JCallback`
 
 ## JccdexInfo API
@@ -126,7 +136,9 @@ info.requestTicker(base, counter, callBack);
 Parameters
 
 `signature`- `string`
+
 `counter`- `string`
+
 `callback`- `implements JCallback`
 
 ### requestAllTickers
@@ -147,8 +159,11 @@ info.requestDepth(base, counter, type, callBack);
 Parameters
 
 `signature`- `string`
+
 `counter`- `string`
+
 `type`- `string {more | normal}`
+
 `callback`- `implements JCallback`
 
 ### requestKline
@@ -160,8 +175,11 @@ info.requestKline(base, counter, type, callBack);
 Parameters
 
 `signature`- `string`
+
 `counter`- `string`
+
 `type`- `string {hour | day | week | month}`
+
 `callback`- `implements JCallback`
 
 ### requestHistory
@@ -174,9 +192,13 @@ info.requestHistory(base, counter, type, time, callBack);
 Parameters
 
 `signature`- `string`
+
 `counter`- `string`
+
 `type`- `string {all | more | newest}`
+
 `time`- `string {Unix time}`
+
 `callback`- `implements JCallback`
 
 ### requestTickerFromCMC
@@ -188,5 +210,7 @@ info.requestTickerFromCMC(token, currency, callBack)
 Parameters
 
 `token`- `string`
+
 `currency`- `string`
+
 `callback`- `implements JCallback`
