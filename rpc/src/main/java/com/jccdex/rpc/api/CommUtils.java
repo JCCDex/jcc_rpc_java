@@ -6,10 +6,8 @@ public class CommUtils {
 
 	public static final int HTTP_STATUS_OK = 200;
 
-	public static final int HTTP_STATUS_NOT_MODIFIED = 304;
-
 	public static Boolean isSuccessful(int statusCode) {
-		return statusCode == HTTP_STATUS_OK || statusCode == HTTP_STATUS_NOT_MODIFIED;
+		return statusCode == HTTP_STATUS_OK;
 	}
 
 	public static String formatExceptionMessage(Response response) {
