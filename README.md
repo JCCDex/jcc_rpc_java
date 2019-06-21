@@ -232,7 +232,64 @@ JccConfig config = JccConfig.getInstance();
 config.setmBaseUrl(jccUrl);
 ```
 
-### requestTicker
+### requestConfig
 ```javascript
 config.requestConfig(callBack);
 ```
+
+## JccExplore API
+```javascript
+JccExplore explore = JccExplore.getInstance();
+explore.setmBaseUrl(jccUrl);
+```
+
+### requestBalance
+```javascript
+explore.requestBalance(uuid, address, callBack);
+```
+
+Parameters
+
+`uuid`- `string`
+
+`address`- `string`
+
+`callback`- `implements JCallback`
+
+### requestTransDetails
+```javascript
+explore.requestTransDetails(uuid, hash, callBack);
+```
+
+Parameters
+
+`uuid`- `string`
+
+`hash`- `string`
+
+`callback`- `implements JCallback`
+
+### requestHistoricTransWithAddr
+```javascript
+explore.requestTransDetails(uuid, page, size, begin, end, type, currency, address, callBack);
+```
+
+Parameters
+
+`uuid`- `string`
+
+`page`- `int`
+
+`size`- `int`
+
+`begin`- `string {xxxx-xx-xx}`
+
+`end`- `string {xxxx-xx-xx}`
+
+`type`- `string {Send、Receive}`
+
+`currency`- `string`
+
+`address`- `string`
+
+`callback`- `implements JCallback`
