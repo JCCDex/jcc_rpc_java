@@ -11,10 +11,10 @@ import com.jccdex.rpc.url.JccdexUrl;
 
 @PrepareForTest({ CommUtils.class })
 public class JccdexExchangeTest {
-//	public final String host = "192.168.66.253";
-//	public JccdexUrl jccUrl = new JccdexUrl(host, false);
-	public final String host = "ektjsbdyfg.weidex.vip";
-	public JccdexUrl jccUrl = new JccdexUrl(host, true);
+	public final String host = "192.168.66.253";
+	public JccdexUrl jccUrl = new JccdexUrl(host, false);
+//	public final String host = "ektjsbdyfg.weidex.vip";
+//	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
 	JccdexExchange exchange = JccdexExchange.getInstance();
 	public JCallback mockCallBack;
@@ -37,6 +37,8 @@ public class JccdexExchangeTest {
 		Mockito.verify(mockExchange).requestSequence("11");
 		mockExchange.transferToken("11", mockCallBack);
 		Mockito.verify(mockExchange).transferToken("11", mockCallBack);
+		mockExchange.requestOrderDetail("11", mockCallBack);
+		Mockito.verify(mockExchange).requestOrderDetail("11", mockCallBack);
 	}
 
 	@Test
@@ -216,6 +218,31 @@ public class JccdexExchangeTest {
 		Mockito.when(mockUrl.getUrl()).thenReturn("https://ektjsbdyfg.weidex.vip:443/11");
 		exchange.setmBaseUrl(mockUrl);
 		exchange.transferToken(signature, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+	}
+	
+	@Test
+	public void testRequestOrderDetail() {
+		exchange.setmBaseUrl(jccUrl);
+		// correct hash
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrderDetail("DB1C9DF2224F3053746052E2790FB202B89E124EAD49356F6B8E3BDC4ACE6551", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
+		// incorrect hash
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrderDetail("DB1C9DF2224F3053746052E2790FB202B89E124EAD49356F6B8E3BDC4ACE65511", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
+		// none hash
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.requestOrderDetail("", mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
+
+		// incorrect host
+		mockCallBack = Mockito.mock(JCallback.class);
+		exchange.setmBaseUrl(new JccdexUrl("11", true));
+		exchange.requestOrderDetail("DB1C9DF2224F3053746052E2790FB202B89E124EAD49356F6B8E3BDC4ACE6551", mockCallBack);
 		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 }

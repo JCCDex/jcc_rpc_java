@@ -57,6 +57,13 @@ public class JConstant {
 	 * {@value}
 	 */
 	public static final String JC_TRNSFER_TOKEN_ROUTE = "/exchange/sign_payment/";
+	
+	/**
+	 * Exchange API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_ORDER_DETAIL_ROUTE = "/exchange/detail/";
 
 	/**
 	 * Info API route.
@@ -97,4 +104,11 @@ public class JConstant {
 	 * return -1 if request sequence in error
 	 */
 	public static final int ERROR_SEQUENCE = -1;
+	
+	/**
+	 * Config API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_REQUEST_CONFIG_ROUTE = "/static/config/jc_config.json";
 }

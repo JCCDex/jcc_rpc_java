@@ -17,4 +17,6 @@ public interface Exchange {
 	int requestSequence(String address);
 
 	void transferToken(String signature, JCallback callback);
+	
+	void requestOrderDetail(String hash, JCallback callback);
 }

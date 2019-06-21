@@ -269,4 +269,31 @@ public class JccdexExchange implements Exchange {
 		}
 	}
 
+	/**
+	 * order detail
+	 * 
+	 * @param hash     {hex string}
+	 * @param callback
+	 */
+	@Override
+	public void requestOrderDetail(String hash, JCallback callback) {
+		String url = mBaseUrl.getUrl();
+		url = url + JConstant.JC_ORDER_DETAIL_ROUTE + hash;
+		Request request = new Request.Builder().url(url).build();
+		try {
+			Response response = okHttpClient.newCall(request).execute();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
+		} catch (IOException e) {
+			callback.onFail(e);
+		}
+	}
+
 }
