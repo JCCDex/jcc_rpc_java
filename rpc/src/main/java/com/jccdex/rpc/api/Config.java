@@ -4,5 +4,5 @@ import com.jccdex.rpc.base.JCallback;
 
 public interface Config {
 
-	void getConfig(JCallback callBack);
+	void requestConfig(JCallback callBack);
 }

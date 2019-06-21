@@ -10,10 +10,10 @@ import com.jccdex.rpc.url.JccdexUrl;
 
 public class JccdexInfoTest {
 
-//	public final String host = "192.168.66.253";
-//	public JccdexUrl jccUrl = new JccdexUrl(host, false);
-	public final String host = "ia111ecfd37.jccdex.cn";
-	public JccdexUrl jccUrl = new JccdexUrl(host, true);
+	public final String host = "192.168.66.253";
+	public JccdexUrl jccUrl = new JccdexUrl(host, false);
+//	public final String host = "ia111ecfd37.jccdex.cn";
+//	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
 	public JccdexInfo info = JccdexInfo.getInstance();
 	public JCallback mockCallBack;

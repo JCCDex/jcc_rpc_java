@@ -20,7 +20,7 @@ public class JccConfigTest {
 	public void test() {
 		config.setmBaseUrl(jccUrl);
 		mockCallBack = Mockito.mock(JCallback.class);
-		config.getConfig(mockCallBack);
+		config.requestConfig(mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 	}
 

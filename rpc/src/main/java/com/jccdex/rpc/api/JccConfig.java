@@ -69,7 +69,7 @@ public class JccConfig implements Config {
 	 * @param callback
 	 */
 	@Override
-	public void getConfig(JCallback callBack) {
+	public void requestConfig(JCallback callBack) {
 		String url = mBaseUrl.getUrl() + JConstant.JC_REQUEST_CONFIG_ROUTE + "?t=" + System.currentTimeMillis();
 		Request request = new Request.Builder().url(url).build();
 		try {

@@ -22,7 +22,7 @@ public class CommUtilsTest {
 		boolean res = CommUtils.isSuccessful(200);
 		assertTrue(res);
 		res = CommUtils.isSuccessful(304);
-		assertTrue(res);
+		assertFalse(res);
 		res = CommUtils.isSuccessful(404);
 		assertFalse(res);
 	}
