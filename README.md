@@ -121,6 +121,17 @@ Parameters
 
 `callback`- `implements JCallback`
 
+### requestOrderDetail
+```javascript
+exchange.requestOrderDetail(signhashature, callback);
+```
+
+Parameters
+
+`hash`- `string`
+
+`callback`- `implements JCallback`
+
 ## JccdexInfo API
 ```javascript
 JccdexInfo info = JccdexInfo.getInstance();
@@ -214,3 +225,14 @@ Parameters
 `currency`- `string`
 
 `callback`- `implements JCallback`
+
+## JccConfig API
+```javascript
+JccConfig config = JccConfig.getInstance();
+config.setmBaseUrl(jccUrl);
+```
+
+### requestTicker
+```javascript
+config.requestConfig(callBack);
+```
