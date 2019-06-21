@@ -111,4 +111,25 @@ public class JConstant {
 	 * {@value}
 	 */
 	public static final String JC_REQUEST_CONFIG_ROUTE = "/static/config/jc_config.json";
+	
+	/**
+	 * Explore API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_EXPLORE_REQUEST_DETAIL_ROUTE = "/hash/detail/";
+	
+	/**
+	 * Explore API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_EXPLORE_REQUEST_BALANCE_ROUTE = "/wallet/balance/";
+	
+	/**
+	 * Explore API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_EXPLORE_REQUEST_TRANS_ROUTE = "/wallet/trans/";
 }
