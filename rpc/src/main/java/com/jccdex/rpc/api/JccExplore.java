@@ -129,18 +129,18 @@ public class JccExplore implements Explore {
 	@Override
 	public void requestHistoricTransWithAddr(String uuid, int page, int size, String begin, String end, String type,
 			String currency, String address, JCallback callback) {
-		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_TRANS_ROUTE + uuid + "?p="
-				+ String.valueOf(page) + "&s=" + String.valueOf(size);
-		if (begin != null || begin != "") {
+		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_TRANS_ROUTE + uuid + "?p=" + String.valueOf(page)
+				+ "&s=" + String.valueOf(size);
+		if (!CommUtils.isEmpty(begin)) {
 			url = url + "&b=" + begin;
 		}
-		if (end != null || end != "") {
+		if (!CommUtils.isEmpty(end)) {
 			url = url + "&e=" + end;
 		}
-		if (type != null || type != "") {
+		if (!CommUtils.isEmpty(type)) {
 			url = url + "&t=" + type;
 		}
-		if (currency != null || currency != "") {
+		if (!CommUtils.isEmpty(currency)) {
 			url = url + "&c=" + currency;
 		}
 		url = url + "&w=" + address;

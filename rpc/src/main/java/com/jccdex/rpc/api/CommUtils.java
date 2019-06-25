@@ -13,4 +13,8 @@ public class CommUtils {
 	public static String formatExceptionMessage(Response response) {
 		return response.code() + ": " + response.message();
 	}
+
+	public static Boolean isEmpty(String str) {
+		return str == null || str.isEmpty();
+	}
 }
