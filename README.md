@@ -3,6 +3,7 @@ jcc rpc java version
 
 [![Build Status](https://travis-ci.com/JCCDex/jcc_rpc_java.svg?branch=master)](https://travis-ci.com/JCCDex/jcc_rpc_java)
 [![Coverage Status](https://coveralls.io/repos/github/JCCDex/jcc_rpc_java/badge.svg?branch=master)](https://coveralls.io/github/JCCDex/jcc_rpc_java?branch=master)
+[![](https://jitpack.io/v/JCCDex/jcc_rpc_java.svg)](https://jitpack.io/#JCCDex/jcc_rpc_java)
 
 ## Usage of jcc_rpc_java API
 
