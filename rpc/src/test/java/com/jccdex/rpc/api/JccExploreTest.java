@@ -53,13 +53,13 @@ public class JccExploreTest {
 
 		// hash type
 		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestHistoricTransWithAddr("uuid", 0, 20, "2018-06-01", "2018-06-021", "Send、Receive", "",
+		explore.requestHistoricTransWithAddr("uuid", 0, 20, "2018-06-01", "2018-06-21", "Send,Receive", "",
 				"jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// hash currency
 		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestHistoricTransWithAddr("uuid", 0, 20, "2018-06-01", "2018-06-021", "Send、Receive", "JJCC",
+		explore.requestHistoricTransWithAddr("uuid", 0, 20, "2018-06-01", "2018-06-21", "Send,Receive", "JJCC",
 				"jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 	}
