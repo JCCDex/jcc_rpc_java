@@ -272,7 +272,7 @@ Parameters
 
 ### requestHistoricTransWithAddr
 ```javascript
-explore.requestTransDetails(uuid, page, size, begin, end, type, currency, address, callBack);
+explore.requestHistoricTransWithAddr(uuid, page, size, begin, end, type, currency, address, callBack);
 ```
 
 Parameters
