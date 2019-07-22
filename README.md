@@ -322,3 +322,25 @@ Parameters
 `address`- `string`
 
 `callback`- `implements JCallback`
+
+### requestPaymentSummary
+
+```javascript
+explore.requestPaymentSummary(uuid, address, dateTpye, date, type, token, callBack);
+```
+
+Parameters
+
+`uuid`- `string`
+
+`address`- `int`
+
+`dateTpye`- `int`
+
+`date`- `string {xxxx-xx-xx}`
+
+`type`- `string {Send、Receive}`
+
+`token`-  `string`
+
+`callback`- `implements JCallback`
