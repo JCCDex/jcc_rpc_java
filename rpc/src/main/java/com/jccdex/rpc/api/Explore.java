@@ -9,4 +9,7 @@ public interface Explore {
 
 	void requestHistoricTransWithAddr(String uuid, int page, int size, String begin, String end, String type,
 			String currency, String address, JCallback callback);
+
+	void requestPaymentSummary(String uuid, String address, int dateTpye, String date, String type, String currency,
+			JCallback callback);
 }
