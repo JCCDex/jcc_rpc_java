@@ -161,5 +161,43 @@ public class JccExplore implements Explore {
 			callback.onFail(e);
 		}
 	}
+	
+	/**
+	 * @param uuid
+	 * @param address  {hex string}
+	 * @param dateTpye
+	 * @param date {xxxx-xx-xx}
+	 * @param type {Send|Receive}
+	 * @param currency
+	 * @param callback
+	 */
+	@Override
+	public void requestPaymentSummary(String uuid, String address, int dateTpye, String date, String type,
+			String currency, JCallback callback) {
+		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_PAYMENT_SUMMARY + uuid + "?w=" + address + "&d="
+				+ date + "&dt=" + dateTpye;
+		if (!CommUtils.isEmpty(type)) {
+			url = url + "&t=" + type;
+		}
+		if (!CommUtils.isEmpty(currency)) {
+			url = url + "&c=" + currency;
+		}
+
+		Request request = new Request.Builder().url(url).build();
+		try {
+			Response response = okHttpClient.newCall(request).execute();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
+		} catch (IOException e) {
+			callback.onFail(e);
+		}
+	}
 
 }

@@ -132,4 +132,11 @@ public class JConstant {
 	 * {@value}
 	 */
 	public static final String JC_EXPLORE_REQUEST_TRANS_ROUTE = "/wallet/trans/";
+	
+	/**
+	 * Explore API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_EXPLORE_REQUEST_PAYMENT_SUMMARY = "/sum/payment_summary/";
 }
