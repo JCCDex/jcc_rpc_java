@@ -166,16 +166,20 @@ public class JccExplore implements Explore {
 	 * @param uuid
 	 * @param address  {hex string}
 	 * @param dateTpye
-	 * @param date {xxxx-xx-xx}
-	 * @param type {Send|Receive}
+	 * @param begin    {xxxx-xx-xx}
+	 * @param end      {xxxx-xx-xx}
+	 * @param type     {Send|Receive}
 	 * @param currency
 	 * @param callback
 	 */
 	@Override
-	public void requestPaymentSummary(String uuid, String address, int dateTpye, String date, String type,
+	public void requestPaymentSummary(String uuid, String address, int dateTpye, String begin, String end, String type,
 			String currency, JCallback callback) {
-		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_PAYMENT_SUMMARY + uuid + "?w=" + address + "&d="
-				+ date + "&dt=" + dateTpye;
+		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_PAYMENT_SUMMARY + uuid + "?w=" + address + "&b="
+				+ begin + "&dt=" + dateTpye;
+		if (!CommUtils.isEmpty(end)) {
+			url = url + "&e=" + end;
+		}
 		if (!CommUtils.isEmpty(type)) {
 			url = url + "&t=" + type;
 		}
