@@ -326,7 +326,7 @@ Parameters
 ### requestPaymentSummary
 
 ```javascript
-explore.requestPaymentSummary(uuid, address, dateTpye, date, type, token, callBack);
+explore.requestPaymentSummary(uuid, address, dateTpye, begin, end, type, token, callBack);
 ```
 
 Parameters
@@ -337,7 +337,9 @@ Parameters
 
 `dateTpye`- `int`
 
-`date`- `string {xxxx-xx-xx}`
+`begin`- `string {xxxx-xx-xx}`
+
+`end`- `string {xxxx-xx-xx}`
 
 `type`- `string {Send、Receive}`
 
