@@ -68,25 +68,30 @@ public class JccExploreTest {
 	public void testRequestPaymentSummary() {
 		explore.setmBaseUrl(jccUrl);
 		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestPaymentSummary("uuid", "jM46vAHoWqg7NMvWqJzn3DEjXyAaXRzSGC", 2, "2019-01-01", "", "",
+		explore.requestPaymentSummary("uuid", "jM46vAHoWqg7NMvWqJzn3DEjXyAaXRzSGC", 2, "2019-01-01","", "", "",
 				mockCallBack);
-		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
-
-		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 3, "2018-06", "", "", mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
 		
 		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 4, "2018", "", "", mockCallBack);
-		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
-
-		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, "2018-06-01", "Send", "",
+		explore.requestPaymentSummary("uuid", "jM46vAHoWqg7NMvWqJzn3DEjXyAaXRzSGC", 2, "2019-01-01","2019-02-01", "", "",
 				mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
 
 		mockCallBack = Mockito.mock(JCallback.class);
-		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, "2018-06-01", "Send", "SWTC_",
+		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 3, "2018-06","2018-07", "", "", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
+		
+		mockCallBack = Mockito.mock(JCallback.class);
+		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 4, "2018","2019", "", "", mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
+
+		mockCallBack = Mockito.mock(JCallback.class);
+		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, "2018-06-01","2018-06-02", "Send", "",
+				mockCallBack);
+		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
+
+		mockCallBack = Mockito.mock(JCallback.class);
+		explore.requestPaymentSummary("uuid", "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, "2018-06-01","2018-06-02", "Send", "SWTC_",
 				mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.matches("0"), Mockito.anyString());
 	}
