@@ -346,3 +346,27 @@ Parameters
 `token`-  `string`
 
 `callback`- `implements JCallback`
+
+### requestHistoricTransWithCur
+
+```javascript
+explore.requestHistoricTransWithCur(uuid, page, size, begin, end, type, currency, callBack);
+```
+
+Parameters
+
+`uuid`- `string`
+
+`page`- `int`
+
+`size`- `int {10/20/50/100}`
+
+`begin`- `string {xxxx-xx-xx}`
+
+`end`- `string {xxxx-xx-xx}`
+
+`type`- `string`
+
+`currency`- `string`
+
+`callback`- `implements JCallback`
