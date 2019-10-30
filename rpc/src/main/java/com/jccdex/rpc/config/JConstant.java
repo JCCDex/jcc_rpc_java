@@ -57,7 +57,7 @@ public class JConstant {
 	 * {@value}
 	 */
 	public static final String JC_TRNSFER_TOKEN_ROUTE = "/exchange/sign_payment/";
-	
+
 	/**
 	 * Exchange API route.
 	 * <P>
@@ -104,39 +104,46 @@ public class JConstant {
 	 * return -1 if request sequence in error
 	 */
 	public static final int ERROR_SEQUENCE = -1;
-	
+
 	/**
 	 * Config API route.
 	 * <P>
 	 * {@value}
 	 */
 	public static final String JC_REQUEST_CONFIG_ROUTE = "/static/config/jc_config.json";
-	
+
 	/**
 	 * Explore API route.
 	 * <P>
 	 * {@value}
 	 */
 	public static final String JC_EXPLORE_REQUEST_DETAIL_ROUTE = "/hash/detail/";
-	
+
 	/**
 	 * Explore API route.
 	 * <P>
 	 * {@value}
 	 */
 	public static final String JC_EXPLORE_REQUEST_BALANCE_ROUTE = "/wallet/balance/";
-	
+
 	/**
 	 * Explore API route.
 	 * <P>
 	 * {@value}
 	 */
 	public static final String JC_EXPLORE_REQUEST_TRANS_ROUTE = "/wallet/trans/";
-	
+
 	/**
 	 * Explore API route.
 	 * <P>
 	 * {@value}
 	 */
 	public static final String JC_EXPLORE_REQUEST_PAYMENT_SUMMARY = "/sum/payment_summary/";
+
+	/**
+	 * Explore API route.
+	 * <P>
+	 * {@value}
+	 */
+	public static final String JC_EXPLORE_REQUEST_PAYMENT_TRANS = "/hash/payment_trans/";
 }

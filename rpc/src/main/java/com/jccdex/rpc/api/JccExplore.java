@@ -118,7 +118,7 @@ public class JccExplore implements Explore {
 	 * 
 	 * @param uuid
 	 * @param page
-	 * @param size
+	 * @param size     {10/20/50/100}
 	 * @param begin    {xxxx-xx-xx}
 	 * @param end      {xxxx-xx-xx}
 	 * @param type
@@ -161,7 +161,7 @@ public class JccExplore implements Explore {
 			callback.onFail(e);
 		}
 	}
-	
+
 	/**
 	 * @param uuid
 	 * @param address  {hex string}
@@ -183,6 +183,50 @@ public class JccExplore implements Explore {
 		if (!CommUtils.isEmpty(type)) {
 			url = url + "&t=" + type;
 		}
+		if (!CommUtils.isEmpty(currency)) {
+			url = url + "&c=" + currency;
+		}
+
+		Request request = new Request.Builder().url(url).build();
+		try {
+			Response response = okHttpClient.newCall(request).execute();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getString("code");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
+		} catch (IOException e) {
+			callback.onFail(e);
+		}
+	}
+
+	/**
+	 * 
+	 * @param uuid
+	 * @param page
+	 * @param size     {10/20/50/100}
+	 * @param begin    {xxxx-xx-xx}
+	 * @param end      {xxxx-xx-xx}
+	 * @param type
+	 * @param currency
+	 * @param callback
+	 */
+	@Override
+	public void requestHistoricTransWithCur(String uuid, int page, int size, String begin, String end, String type,
+			String currency, JCallback callback) {
+		String url = mBaseUrl.getUrl() + JConstant.JC_EXPLORE_REQUEST_PAYMENT_TRANS + uuid + "?p="
+				+ String.valueOf(page) + "&s=" + String.valueOf(size);
+		if (!CommUtils.isEmpty(begin)) {
+			url = url + "&b=" + begin;
+		}
+		if (!CommUtils.isEmpty(end)) {
+			url = url + "&e=" + end;
+		}
+		url = url + "&t=" + type;
 		if (!CommUtils.isEmpty(currency)) {
 			url = url + "&c=" + currency;
 		}
