@@ -59,14 +59,12 @@ Parameters
 
 ```javascript
 /** get historic transactions with jingtum address. */
-exchange.requestHistoricTransactions(address, page, ledger, seq, callback);
+exchange.requestHistoricTransactions(address, ledger, seq, callback);
 ```
 
 Parameters
 
 `address`- `string`
-
-`page`- `int`
 
 `ledger`- `int`
 
