@@ -6,7 +6,7 @@ public interface Exchange {
 
 	void requestBalance(String address, JCallback callback);
 
-	void requestHistoricTransactions(String address, int page, int ledger, int seq, JCallback callback);
+	void requestHistoricTransactions(String address, int ledger, int seq, JCallback callback);
 
 	void requestOrders(String address, int page, JCallback callback);
 

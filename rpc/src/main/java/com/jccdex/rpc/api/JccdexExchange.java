@@ -96,21 +96,18 @@ public class JccdexExchange implements Exchange {
 	 * get historic transactions with jingtum address
 	 * 
 	 * @param address  {hex string}
-	 * @param page
 	 * @param ledger
 	 * @param seq
 	 * @param callback
 	 */
-	public void requestHistoricTransactions(String address, int page, int ledger, int seq,
+	public void requestHistoricTransactions(String address, int ledger, int seq,
 			@NotNull JCallback callback) {
 		String url = mBaseUrl.getUrl();
-		url = url + JConstant.JC_REQUEST_HISTORY_ROUTE + address + "/" + String.valueOf(page);
+		url = url + JConstant.JC_REQUEST_HISTORY_ROUTE + address;
 		final Request.Builder reqBuild = new Request.Builder();
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		if (page > 1) {
-			urlBuilder.addQueryParameter("ledger", String.valueOf(ledger));
-			urlBuilder.addQueryParameter("seq", String.valueOf(seq));
-		}
+		urlBuilder.addQueryParameter("ledger", String.valueOf(ledger));
+		urlBuilder.addQueryParameter("seq", String.valueOf(seq));
 		reqBuild.url(urlBuilder.build());
 		Request request = reqBuild.build();
 		try {

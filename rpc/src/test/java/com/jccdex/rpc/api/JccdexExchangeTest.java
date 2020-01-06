@@ -11,10 +11,10 @@ import com.jccdex.rpc.url.JccdexUrl;
 
 @PrepareForTest({ CommUtils.class })
 public class JccdexExchangeTest {
-	public final String host = "192.168.66.253";
-	public JccdexUrl jccUrl = new JccdexUrl(host, false);
-//	public final String host = "ektjsbdyfg.weidex.vip";
-//	public JccdexUrl jccUrl = new JccdexUrl(host, true);
+//	public final String host = "192.168.66.253";
+//	public JccdexUrl jccUrl = new JccdexUrl(host, false);
+	public final String host = "ejia348ffbda04.jccdex.cn";
+	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
 	JccdexExchange exchange = JccdexExchange.getInstance();
 	public JCallback mockCallBack;
@@ -25,8 +25,8 @@ public class JccdexExchangeTest {
 		JccdexExchange mockExchange = Mockito.mock(JccdexExchange.class);
 		mockExchange.requestBalance("11", mockCallBack);
 		Mockito.verify(mockExchange).requestBalance("11", mockCallBack);
-		mockExchange.requestHistoricTransactions("11", 0, 0, 0, mockCallBack);
-		Mockito.verify(mockExchange).requestHistoricTransactions("11", 0, 0, 0, mockCallBack);
+		mockExchange.requestHistoricTransactions("11", 0, 0, mockCallBack);
+		Mockito.verify(mockExchange).requestHistoricTransactions("11", 0, 0, mockCallBack);
 		mockExchange.requestOrders("11", 0, mockCallBack);
 		Mockito.verify(mockExchange).requestOrders("11", 0, mockCallBack);
 		mockExchange.createOrder("11", mockCallBack);
@@ -72,33 +72,33 @@ public class JccdexExchangeTest {
 		exchange.setmBaseUrl(jccUrl);
 		// correct address at page 1
 		mockCallBack = Mockito.mock(JCallback.class);
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, 0, mockCallBack);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// correct address at page 2
 		mockCallBack = Mockito.mock(JCallback.class);
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 2, 11461562, 0, mockCallBack);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 11461562, 0, mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// correct address
 		mockCallBack = Mockito.mock(JCallback.class);
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, 0, 0, mockCallBack);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN2", 0, 0, mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
 
 		// none address
 		mockCallBack = Mockito.mock(JCallback.class);
-		exchange.requestHistoricTransactions("", 0, 0, 0, mockCallBack);
-		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+		exchange.requestHistoricTransactions("", 0, 0, mockCallBack);
+		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 
 		// special address
 		mockCallBack = Mockito.mock(JCallback.class);
-		exchange.requestHistoricTransactions("?", 0, 0, 0, mockCallBack);
+		exchange.requestHistoricTransactions("?", 0, 0, mockCallBack);
 		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 
 		// incorrect host
 		mockCallBack = Mockito.mock(JCallback.class);
 		exchange.setmBaseUrl(new JccdexUrl("11", true));
-		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, 0, mockCallBack);
+		exchange.requestHistoricTransactions("jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6", 0, 0, mockCallBack);
 		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 
