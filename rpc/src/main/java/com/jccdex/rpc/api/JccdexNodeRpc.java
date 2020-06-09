@@ -123,4 +123,35 @@ public class JccdexNodeRpc implements NodeRpc {
 		}
 	}
 
+	@Override
+	public void requestTx(String hash, JCallback callback) {
+		String url = mBaseUrl.getUrl();
+		JSONObject data = new JSONObject();
+		JSONObject object = new JSONObject();
+		object.put("transaction", hash);
+		object.put("binary", false);
+		ArrayList<JSONObject> params = new ArrayList<>();
+		params.add(object);
+		data.put("method", "tx");
+		data.put("params", params);
+		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toJSONString());
+
+		Request request = new Request.Builder().url(url).post(formBody).build();
+		try {
+			Response response = okHttpClient.newCall(request).execute();
+			if (CommUtils.isSuccessful(response.code())) {
+				ResponseBody body = response.body();
+				String res = body.string();
+				String code = JSONObject.parseObject(res).getJSONObject("result").getString("status");
+				body.close();
+				callback.onResponse(code, res);
+			} else {
+				callback.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
+			}
+		} catch (IOException e) {
+			callback.onFail(e);
+		}
+
+	}
+
 }
