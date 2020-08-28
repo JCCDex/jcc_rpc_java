@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jccdex.rpc.base.JCallback;
 import com.jccdex.rpc.config.JConstant;
 import com.jccdex.rpc.url.BaseUrl;
@@ -77,7 +78,9 @@ public class JccConfig implements Config {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {

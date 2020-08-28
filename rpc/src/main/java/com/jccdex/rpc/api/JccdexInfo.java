@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.validation.constraints.NotNull;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jccdex.rpc.base.JCallback;
 import com.jccdex.rpc.config.JConstant;
 import com.jccdex.rpc.url.BaseUrl;
@@ -83,7 +84,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {
@@ -108,7 +111,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {
@@ -137,7 +142,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {
@@ -151,7 +158,7 @@ public class JccdexInfo implements Info {
 	/**
 	 * @param base
 	 * @param counter
-	 * @param type    {hour | day | week | month}
+	 * @param type     {hour | day | week | month}
 	 * @param callBack
 	 */
 	@Override
@@ -165,7 +172,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {
@@ -179,8 +188,8 @@ public class JccdexInfo implements Info {
 	/**
 	 * @param base
 	 * @param counter
-	 * @param type    {all | more | newest}
-	 * @param time    {Unix time}
+	 * @param type     {all | more | newest}
+	 * @param time     {Unix time}
 	 * @param callBack
 	 */
 	@Override
@@ -200,7 +209,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {
@@ -232,7 +243,9 @@ public class JccdexInfo implements Info {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getString("code");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("code").toString();
 				callBack.onResponse(code, res);
 				body.close();
 			} else {

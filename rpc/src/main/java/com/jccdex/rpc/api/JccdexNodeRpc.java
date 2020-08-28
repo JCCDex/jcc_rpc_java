@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jccdex.rpc.base.JCallback;
 import com.jccdex.rpc.url.BaseUrl;
 
@@ -67,15 +70,20 @@ public class JccdexNodeRpc implements NodeRpc {
 	@Override
 	public void requestSequence(String address, JCallback callback) {
 		String url = mBaseUrl.getUrl();
-		JSONObject data = new JSONObject();
 
-		JSONObject object = new JSONObject();
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode data = mapper.createObjectNode();
+		ObjectNode object = mapper.createObjectNode();
+
 		object.put("account", address);
-		ArrayList<JSONObject> params = new ArrayList<>();
+		ArrayList<ObjectNode> params = new ArrayList<>();
 		params.add(object);
+
+		ArrayNode array = mapper.valueToTree(params);
+
 		data.put("method", "account_info");
-		data.put("params", params);
-		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toJSONString());
+		data.set("params", array);
+		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toString());
 
 		Request request = new Request.Builder().url(url).post(formBody).build();
 		try {
@@ -83,7 +91,8 @@ public class JccdexNodeRpc implements NodeRpc {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getJSONObject("result").getString("status");
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("result").get("status").toString();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -97,14 +106,20 @@ public class JccdexNodeRpc implements NodeRpc {
 	@Override
 	public void transfer(String blob, JCallback callback) {
 		String url = mBaseUrl.getUrl();
-		JSONObject data = new JSONObject();
-		JSONObject object = new JSONObject();
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode data = mapper.createObjectNode();
+		ObjectNode object = mapper.createObjectNode();
 		object.put("tx_blob", blob);
-		ArrayList<JSONObject> params = new ArrayList<>();
+
+		ArrayList<ObjectNode> params = new ArrayList<>();
 		params.add(object);
+
+		ArrayNode array = mapper.valueToTree(params);
+
 		data.put("method", "submit");
-		data.put("params", params);
-		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toJSONString());
+		data.set("params", array);
+
+		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toString());
 
 		Request request = new Request.Builder().url(url).post(formBody).build();
 		try {
@@ -112,7 +127,8 @@ public class JccdexNodeRpc implements NodeRpc {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getJSONObject("result").getString("engine_result");
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("result").get("engine_result").toString();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -126,15 +142,21 @@ public class JccdexNodeRpc implements NodeRpc {
 	@Override
 	public void requestTx(String hash, JCallback callback) {
 		String url = mBaseUrl.getUrl();
-		JSONObject data = new JSONObject();
-		JSONObject object = new JSONObject();
+
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode data = mapper.createObjectNode();
+		ObjectNode object = mapper.createObjectNode();
 		object.put("transaction", hash);
 		object.put("binary", false);
-		ArrayList<JSONObject> params = new ArrayList<>();
+		ArrayList<ObjectNode> params = new ArrayList<>();
 		params.add(object);
+
+		ArrayNode array = mapper.valueToTree(params);
+
 		data.put("method", "tx");
-		data.put("params", params);
-		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toJSONString());
+		data.set("params", array);
+
+		RequestBody formBody = RequestBody.create(MediaType.parse("application/json"), data.toString());
 
 		Request request = new Request.Builder().url(url).post(formBody).build();
 		try {
@@ -142,7 +164,8 @@ public class JccdexNodeRpc implements NodeRpc {
 			if (CommUtils.isSuccessful(response.code())) {
 				ResponseBody body = response.body();
 				String res = body.string();
-				String code = JSONObject.parseObject(res).getJSONObject("result").getString("status");
+				JsonNode actualObj = mapper.readTree(res);
+				String code = actualObj.get("result").get("status").toString();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
