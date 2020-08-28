@@ -84,7 +84,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -119,7 +119,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -147,7 +147,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -178,7 +178,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -209,7 +209,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -236,7 +236,7 @@ public class JccdexExchange implements Exchange {
 				body.close();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				if ((JConstant.REQUEST_JC_SUCCESS_CODE).equals(code)) {
 					return actualObj.get("data").get("sequence").asInt();
 				}
@@ -268,7 +268,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -297,7 +297,7 @@ public class JccdexExchange implements Exchange {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {

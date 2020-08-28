@@ -92,7 +92,7 @@ public class JccdexNodeRpc implements NodeRpc {
 				ResponseBody body = response.body();
 				String res = body.string();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("result").get("status").toString();
+				String code = actualObj.get("result").get("status").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -128,7 +128,7 @@ public class JccdexNodeRpc implements NodeRpc {
 				ResponseBody body = response.body();
 				String res = body.string();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("result").get("engine_result").toString();
+				String code = actualObj.get("result").get("engine_result").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -165,7 +165,7 @@ public class JccdexNodeRpc implements NodeRpc {
 				ResponseBody body = response.body();
 				String res = body.string();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("result").get("status").toString();
+				String code = actualObj.get("result").get("status").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {

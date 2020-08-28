@@ -80,7 +80,7 @@ public class JccConfig implements Config {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callBack.onResponse(code, res);
 			} else {

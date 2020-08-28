@@ -80,7 +80,7 @@ public class JccExplore implements Explore {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -108,7 +108,7 @@ public class JccExplore implements Explore {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -158,7 +158,7 @@ public class JccExplore implements Explore {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -202,7 +202,7 @@ public class JccExplore implements Explore {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
@@ -248,7 +248,7 @@ public class JccExplore implements Explore {
 				String res = body.string();
 				ObjectMapper mapper = new ObjectMapper();
 				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").toString();
+				String code = actualObj.get("code").asText();
 				body.close();
 				callback.onResponse(code, res);
 			} else {
