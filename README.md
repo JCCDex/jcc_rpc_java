@@ -81,6 +81,7 @@ nodeRpc.requestSequence(account, new JCallback() {
             int sequence = JSONObject.parseObject(response).getJSONObject("result").getJSONObject("account_data").getIntValue("Sequence");
             payment.sequence(new UInt32(sequence));
             SignedTransaction tx = null;
+            // 交易本地签名
             try {
                 tx = payment.sign(secret);
             } catch (Exception e) {
