@@ -15,6 +15,4 @@ public interface Info {
 
 	void requestHistory(String base, String counter, String type, String time, JCallback callBack);
 
-	void requestTickerFromCMC(String token, String currency, JCallback callBack);
-
 }

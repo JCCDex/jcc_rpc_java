@@ -8,8 +8,8 @@ import com.jccdex.rpc.url.JccdexUrl;
 
 public class JccConfigTest {
 
-	public final String host = "192.168.66.253";
-	public JccdexUrl jccUrl = new JccdexUrl(host, false);
+	public final String host = "uploadletsdex.swtc.top";
+	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 //	public final String host = "ektjsbdyfg.weidex.vip";
 //	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
@@ -22,6 +22,7 @@ public class JccConfigTest {
 		mockCallBack = Mockito.mock(JCallback.class);
 		config.requestConfig(mockCallBack);
 		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
+
 	}
 
 }

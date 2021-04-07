@@ -222,38 +222,4 @@ public class JccdexInfo implements Info {
 		}
 	}
 
-	/**
-	 * request token info from coinmarketdata
-	 * 
-	 * @param token
-	 * @param currency
-	 * @param callBack
-	 */
-	@Override
-	public void requestTickerFromCMC(@NotNull String token, @NotNull String currency, @NotNull JCallback callBack) {
-		String url = mBaseUrl.getUrl() + "/" + token.toLowerCase() + "_" + currency.toLowerCase() + ".json";
-		String t = String.valueOf(new Date().getTime());
-		final Request.Builder reBuild = new Request.Builder();
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		urlBuilder.addQueryParameter("t", t);
-		reBuild.url(urlBuilder.build());
-		Request request = reBuild.build();
-		try {
-			Response response = okHttpClient.newCall(request).execute();
-			if (CommUtils.isSuccessful(response.code())) {
-				ResponseBody body = response.body();
-				String res = body.string();
-				ObjectMapper mapper = new ObjectMapper();
-				JsonNode actualObj = mapper.readTree(res);
-				String code = actualObj.get("code").asText();
-				callBack.onResponse(code, res);
-				body.close();
-			} else {
-				callBack.onFail(new Exception(CommUtils.formatExceptionMessage(response)));
-			}
-		} catch (IOException e) {
-			callBack.onFail(e);
-		}
-	}
-
 }

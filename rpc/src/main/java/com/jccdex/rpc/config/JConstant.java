@@ -110,7 +110,7 @@ public class JConstant {
 	 * <P>
 	 * {@value}
 	 */
-	public static final String JC_REQUEST_CONFIG_ROUTE = "/static/config/jc_config.json";
+	public static final String JC_REQUEST_CONFIG_ROUTE = "/static/config/jc_hosts.json";
 
 	/**
 	 * Explore API route.

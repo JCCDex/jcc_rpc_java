@@ -13,7 +13,7 @@ import com.jccdex.rpc.url.JccdexUrl;
 public class JccdexExchangeTest {
 //	public final String host = "192.168.66.253";
 //	public JccdexUrl jccUrl = new JccdexUrl(host, false);
-	public final String host = "ejia348ffbda04.jccdex.cn";
+	public final String host = "eji39bdbd155a03.swtc.top";
 	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
 	JccdexExchange exchange = JccdexExchange.getInstance();
