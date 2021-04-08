@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.jccdex</groupId>
-	<artifactId>rpc</artifactId>
+	<artifactId>JccRPC</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>rpc</name>
+	<name>JccRPC</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

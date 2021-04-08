@@ -10,10 +10,10 @@ import com.jccdex.rpc.url.JccdexUrl;
 
 public class JccdexInfoTest {
 
-	public final String host = "192.168.66.253";
-	public JccdexUrl jccUrl = new JccdexUrl(host, false);
-//	public final String host = "ia111ecfd37.jccdex.cn";
-//	public JccdexUrl jccUrl = new JccdexUrl(host, true);
+//	public final String host = "192.168.66.253";
+//	public JccdexUrl jccUrl = new JccdexUrl(host, false);
+	public final String host = "iji41bdbd42011.swtc.top";
+	public JccdexUrl jccUrl = new JccdexUrl(host, true);
 
 	public JccdexInfo info = JccdexInfo.getInstance();
 	public JCallback mockCallBack;
@@ -32,8 +32,6 @@ public class JccdexInfoTest {
 		Mockito.verify(mockInfo).requestKline("swt", "cnt", "hour", mockCallBack);
 		mockInfo.requestHistory("swt", "cnt", "newest", "1111", mockCallBack);
 		Mockito.verify(mockInfo).requestHistory("swt", "cnt", "newest", "1111", mockCallBack);
-		mockInfo.requestTickerFromCMC("eth", "cny", mockCallBack);
-		Mockito.verify(mockInfo).requestTickerFromCMC("eth", "cny", mockCallBack);
 	}
 
 	@Test
@@ -199,32 +197,6 @@ public class JccdexInfoTest {
 		mockCallBack = Mockito.mock(JCallback.class);
 		info.setmBaseUrl(new JccdexUrl("11", true));
 		info.requestHistory("", "cnt", "", unixtime, mockCallBack);
-		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
-	}
-
-	@Test
-	public void testReuestTickerFromCMC() {
-		String host = "weidex.vip";
-		JccdexUrl jccUrl = new JccdexUrl(host, true);
-		info.setmBaseUrl(jccUrl);
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.requestTickerFromCMC("eth", "cny", mockCallBack);
-		Mockito.verify(mockCallBack).onResponse(Mockito.anyString(), Mockito.anyString());
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.requestTickerFromCMC("eth", "cnt", mockCallBack);
-		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.requestTickerFromCMC("", "cny", mockCallBack);
-		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.requestTickerFromCMC("eth", "", mockCallBack);
-		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.requestTickerFromCMC("", "", mockCallBack);
-		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
-		mockCallBack = Mockito.mock(JCallback.class);
-		info.setmBaseUrl(new JccdexUrl("11", true));
-		info.requestTickerFromCMC("eth", "cny", mockCallBack);
 		Mockito.verify(mockCallBack).onFail(Mockito.any(Exception.class));
 	}
 }
